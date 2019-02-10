@@ -1,7 +1,7 @@
 # homeassistant-lovelace-birthday-reminder-card
 Custom card that helps you remember birthdays and other events that happen once a year on the same date.
 
-# How to install
+## How to install
 1. Copy the script to your local directory.
 2. Add this to your ui-lovelace.yaml:
 
@@ -18,7 +18,7 @@ Place the card in your ui-lovelace.yaml like this:
   title: "Birthdays"
 ```
 
-# How to edit birthday list
+## How to edit birthday list
 
 (to come)
 
