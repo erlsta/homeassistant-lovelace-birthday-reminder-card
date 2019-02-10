@@ -1,6 +1,8 @@
 # homeassistant-lovelace-birthday-reminder-card
 Custom card that helps you remember birthdays and other events that happen once a year on the same date. I made this because I wanted a simple card to remind me of birthdays, without having to install Google calendar.
 
+
+
 ## How to install
 1. Copy the script to your local directory (I suggest to place all plugins in a directory "plugins" inside your www-folder and to add a new directory inside this for each custom card - if not: adjust the path to birthday-card.js).
 2. Add this to your ui-lovelace.yaml:
