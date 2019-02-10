@@ -32,7 +32,9 @@ Copy the line and change the information to add as many birthdays you want to th
 
 ### Options
 `Year` is optional, but without this, age will of course not be displayed.
+
 Add `, s:1` after the year to add a cross symbol after the name (used for people that has passed on). The symbol can be changed by changing the string after `bdDeadSymbol` to another char.
+
 Add `, s:2` after the year to add a heart symbol after the name (used for wedding aniversaries, etc.). The symbol can be changed by changing the string after `bdMarriedSymbol` to another char.
 
 
