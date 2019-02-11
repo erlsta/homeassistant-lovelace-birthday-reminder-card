@@ -30,7 +30,7 @@ Open the js-file in a text editor. At the start of the file, you will see an arr
 
 Change the name, day, month and year to what suits you.
 
-Copy the line and change the information to add as many birthdays you want to the list.
+Copy the line and change the information to add as many birthdays you want to the list. For easy management, I suggest keeping the list in alfabetical order, although this will not make any difference for the function of the card itself.
 
 ### Options
 `Year` is optional, but without this, age will of course not be displayed.
