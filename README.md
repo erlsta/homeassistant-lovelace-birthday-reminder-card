@@ -4,7 +4,7 @@ Custom card that helps you remember birthdays and other events that happen once 
 ![Image of birthday-card](https://github.com/erlsta/homeassistant-lovelace-birthday-reminder-card/blob/master/birthday-card.png)
 
 ## How to install
-1. Copy the script to your local directory (I suggest to place all plugins in a directory "plugins" inside your www-folder and to add a new directory inside this for each custom card - if not: adjust the path to birthday-card.js).
+1. Copy the script (birthday-card.js) to your local directory (I suggest to place all plugins in a directory "plugins" inside your www-folder and to add a new directory inside this for each custom card - if not: adjust the path to birthday-card.js). The file birthday-card.png is not necessary - it's just there so I can display the picture of the card above.
 2. Add this to your ui-lovelace.yaml:
 
 ```
@@ -16,9 +16,14 @@ resources:
 Place the card in your ui-lovelace.yaml like this:
 
 ```
-- type: "custom:birthday-card"
-  title: "Birthdays"
+views:
+  - title: "Example"
+    cards:
+      - type: "custom:birthday-card"
+        title: "Birthdays"
 ```
+
+(or add it as a card to an existing view)
 
 ## How to edit birthday list
 
