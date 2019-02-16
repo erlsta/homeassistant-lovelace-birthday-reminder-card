@@ -1,7 +1,7 @@
 class BirthdayCard extends HTMLElement {
 	set hass(hass) {
 		
-		
+// Birthday-calendar v1.1 (16.02.2019)		
 		
 		
 ///// SETTINGS /////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ class BirthdayCard extends HTMLElement {
 		var bdTextNone = "No birthdays in the next"; // No birthdays during next
 		var bdTextDays = "days"; // days
 		var bdTextYears = "years"; // years
-		var bdTextIn = "in"; // in
+		var bdTextIn = ""; // in
 		
 		
 ///// BIRTHDAY REGISTRY ////////////////////////////////////////////////////
@@ -71,9 +71,13 @@ class BirthdayCard extends HTMLElement {
 			var obj = birthdayList[i];
 			
 			if ( (obj.month < currentMonth) || ( (obj.month == currentMonth) && (obj.day < currentDay) ) ) {
+				// Birthday passed in current year
 				obj.ts = new Date((currentYear+1), obj.month, obj.day).getTime();
+				obj.aPlus = 1;
 			} else {
+				// Birthday to come current year
 				obj.ts = new Date(currentYear, obj.month, obj.day).getTime();
+				obj.aPlus = 0;
 			}
 			
 			obj.diff = Math.round( Math.abs( (currentDayTS - obj.ts)/(oneDay) ) );
@@ -90,7 +94,7 @@ class BirthdayCard extends HTMLElement {
 			var obj = sortertListe[i];
 			
 			if (obj.year > 0) {
-				var age = "(" + (currentYear - obj.year) + " " + bdTextYears + ")";
+				var age = "(" + (currentYear - obj.year + obj.aPlus) + " " + bdTextYears + ")";
 			} else {
 				var age = "";
 			}
