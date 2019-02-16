@@ -5,6 +5,7 @@ Custom card that helps you remember birthdays and other events that happen once 
 
 ## Version history
 v1.0  (2019.02.11) First version
+
 v1.1  (2019.02.16) Fixed age for people whos birthday date has passed in current year
 
 ## How to install
