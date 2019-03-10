@@ -16,7 +16,7 @@ Custom card that helps you remember birthdays and other events that happen once 
 
 ```
 resources:
-  - url: /local/plugins/birthday-card/birthday-card.js?v=1.001
+  - url: /local/plugins/birthday-card/birthday-card.js?v=1.2001
     type: js
 ```
 
