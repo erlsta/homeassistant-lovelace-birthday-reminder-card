@@ -4,9 +4,9 @@ Custom card that helps you remember birthdays and other events that happen once 
 ![Image of birthday-card](https://github.com/erlsta/homeassistant-lovelace-birthday-reminder-card/blob/master/birthday-card.png)
 
 ## Version history
-v1.0  (2019.02.11) First version
-
-v1.1  (2019.02.16) Fixed age for people whos birthday date has passed in current year
+|v1.0|(2019.02.11)|First version|
+|v1.1|(2019.02.16)|Fixed age for people whos birthday date has passed in current year|
+|v1.2|(2019.03.10)|*** BREAKING CHANGES *** setting for numberofdays moved to ui-lovelace.yaml. This alows for changing the number of days to next birthday without having to edit the js-file. See "How to install". Bugfix: fixed a bug that caused an error in the count of days to an upcoming birthday when the birthday is not in the current month|
 
 ## How to install
 1. Copy the script (birthday-card.js) to your local directory (I suggest to place all plugins in a directory "plugins" inside your www-folder and to add a new directory inside this for each custom card - if not: adjust the path to birthday-card.js). The file birthday-card.png is not necessary - it's just there so I can display the picture of the card above.
@@ -26,9 +26,16 @@ views:
     cards:
       - type: "custom:birthday-card"
         title: "Birthdays"
+        numberofdays: 30
 ```
 
 (or add it as a card to an existing view)
+
+## How to update from previous version
+- Copy out your existing birthday list and string translations from the old birthday-card.js into an empty text-file.
+- Replace all text in your existing birthday-card.js file with the new code from GitHub.
+- Copy back your old birthday list and string translations into the new birthday-card.js.
+- Remember to set 'numberofdays' in ui-lovelace (if not, numberofdays defaults to 14).
 
 ## How to edit birthday list
 
@@ -54,7 +61,8 @@ You can only set one of the two (s:1 or s:2).
 **Remember to increment the version number every time you edit the birthday list (V=1.002, 1.003, etc.).**
 After incrementing the version number, reload the page where you display your Home Assistant page (usually by holding down command/control and reloading the page - might differ from browser to browser).
 
-### Settings
-Change `numberOfDays` to change the number of days ahead to display birthdays. Set this to 365 to display all birthdays for a full year.
+### Settings in ui-lovelace.yaml
+Set `numberofdays` to change the number of days ahead to display birthdays. Set this to 365 to display all birthdays for a full year.
 
-You may also translate the text used in the card to your own language, by changing the strings under "String translations".
+### Settings in the birthday-card.js file
+You may also translate the text used in the card to your own language, by changing the strings under "String translations" in birthday-card.js.
