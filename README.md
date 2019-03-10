@@ -5,7 +5,7 @@ Custom card that helps you remember birthdays and other events that happen once 
 
 ## Version history
 | Version | Date          |               |
-| ------- | ------------- | ------------- |
+| :-----: | ------------- | ------------- |
 | v1.0    | (2019.02.11)  | First version  |
 | v1.1    | (2019.02.16)  | Fixed age for people whos birthday date has passed in current year|
 | v1.2    | (2019.03.10)  | *** BREAKING CHANGES *** setting for numberofdays moved to ui-lovelace.yaml. This alows for changing the number of days to next birthday without having to edit the js-file. See "How to install". Bugfix: fixed a bug that caused an error in the count of days to an upcoming birthday when the birthday is not in the current month|
@@ -38,6 +38,7 @@ views:
 - Replace all text in your existing birthday-card.js file with the new code from GitHub.
 - Copy back your old birthday list and string translations into the new birthday-card.js.
 - Remember to set 'numberofdays' in ui-lovelace (if not, numberofdays defaults to 14).
+- Remember to set a higher version number for the card in resources under ui-lovelace.yaml
 
 ## How to edit birthday list
 
