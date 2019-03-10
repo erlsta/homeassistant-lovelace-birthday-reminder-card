@@ -1,15 +1,14 @@
 class BirthdayCard extends HTMLElement {
 	set hass(hass) {
 		
-// Birthday-calendar v1.1 (16.02.2019)		
-		
-		
+// Birthday-calendar v1.2 (10.03.2019)		
+
+
 ///// SETTINGS /////////////////////////////////////////////////////////////
 		
 		
 		// Settings //
 		
-		var numberOfDays = 31; // Number of days from today upcomming birthdays will be displayed
 		var bdDeadSymbol = "&#8224;"; // (Symbol for people who have passed on - set «, d:1» in birthday list)
 		var bdMarriedSymbol = "&#9829;";
 		
@@ -43,11 +42,7 @@ class BirthdayCard extends HTMLElement {
 		if (!this.content) {
 			const card = document.createElement('ha-card');
 			var tittel = this.config.title;
-			if (tittel) {
-				card.header = tittel;
-			} else {
-				card.header = "Birthdays";
-			}
+			card.header = tittel ? tittel : "Birthdays"; // Card title from ui-lovelace.yaml - Defaults to Birthdays
 			this.content = document.createElement('div');
 			this.content.style.padding = '0 16px 16px';
 			card.appendChild(this.content);
@@ -57,12 +52,13 @@ class BirthdayCard extends HTMLElement {
 		const entityId = this.config.entity;
 		const state = hass.states[entityId];
 		const stateStr = state ? state.state : 'unavailable';
+		const numberOfDays = this.config.numberofdays ? this.config.numberofdays : 14; //Number of days from today upcomming birthdays will be displayed - default 14
 		
 		
-		
-		var currentMonth = new Date().getMonth() + 1;
-		var currentDay = new Date().getDate();
-		var currentYear = new Date().getFullYear();
+		var current = new Date();
+		var currentMonth = current.getMonth();
+		var currentDay = current.getDate();
+		var currentYear = current.getFullYear();
 		var currentDayTS = new Date(currentYear, currentMonth, currentDay).getTime();
 		var oneDay = 24*60*60*1000;
 		
@@ -70,13 +66,13 @@ class BirthdayCard extends HTMLElement {
 		for(var i = 0; i < birthdayList.length; i++) {
 			var obj = birthdayList[i];
 			
-			if ( (obj.month < currentMonth) || ( (obj.month == currentMonth) && (obj.day < currentDay) ) ) {
-				// Birthday passed in current year
-				obj.ts = new Date((currentYear+1), obj.month, obj.day).getTime();
+			if ( ((obj.month-1) < currentMonth) || ( ((obj.month-1) == currentMonth) && (obj.day < currentDay) ) ) {
+				// Birthday passed in current year - add one year to throw date to next birthday
+				obj.ts = new Date((currentYear+1), (obj.month-1), obj.day).getTime();
 				obj.aPlus = 1;
 			} else {
 				// Birthday to come current year
-				obj.ts = new Date(currentYear, obj.month, obj.day).getTime();
+				obj.ts = new Date(currentYear, (obj.month-1), obj.day).getTime();
 				obj.aPlus = 0;
 			}
 			
@@ -103,14 +99,14 @@ class BirthdayCard extends HTMLElement {
 			if (obj.s == 1) { bdSymbol = " " + bdDeadSymbol; }
 			if (obj.s == 2) { bdSymbol = " " + bdMarriedSymbol; }
 			
-			if ((obj.month == currentMonth) && (obj.day == currentDay)) {
+			if (((obj.month-1) == currentMonth) && (obj.day == currentDay)) {
 				
 				birthdayToday = birthdayToday + "<div class='bd-wrapper bd-today'><ha-icon class='ha-icon entity on' icon='mdi:crown'></ha-icon><div class='bd-name'>" + obj.name + " " + age + bdSymbol + "</div><div class='bd-when'>" + bdTextToday + "</div></div>";
 				
 			} else if (obj.ts != 0) {
 				
 				var dbExpr = obj.diff == 1 ? bdTextTomorrow : bdTextIn + " " + obj.diff + " " + bdTextDays;
-				birthdayNext = birthdayNext + "<div class='bd-wrapper'><ha-icon class='ha-icon entity' icon='mdi:calendar-clock'></ha-icon><div class='bd-name'>" + obj.name + " " + age + bdSymbol + "</div><div class='bd-when'>" + dbExpr + " (" + obj.day + "." + obj.month + ")</div></div>";
+				birthdayNext = birthdayNext + "<div class='bd-wrapper'><ha-icon class='ha-icon entity' icon='mdi:calendar-clock'></ha-icon><div class='bd-name'>" + obj.name + " " + age + bdSymbol + "</div><div class='bd-when'>" + dbExpr + " (" + obj.day + "." + (obj.month-1) + ")</div></div>";
 				
 			}
 		}
@@ -145,7 +141,7 @@ class BirthdayCard extends HTMLElement {
 			.bd-wrapper .ha-icon.on {
 				margin-left: 5px;
 				margin-right: 17px;
-				color: #feb13d;
+				color: var(--paper-item-icon-active-color);
 			}
 			.bd-name {
 				display: inline-block;
